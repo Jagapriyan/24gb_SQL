@@ -1,0 +1,37 @@
+Installation Guide
+
+PostGreSQL - SQL Engine that stores data and reads queries and returns information
+
+PgAdmin - Graphical User Interface for connecting with PostGreSQL.
+
+Don’t forget the password you setup for PostgreSQL (for simplicity, keep it as Read@123)
+
+Step1:  Download and install PostgreSQL  ( https://www.enterprisedb.com/postgresql-tutorial-resources-training?cid=437)   For 32bit computer (https://www.enterprisedb.com/postgresql-tutorial-resources-training?cid=63)
+
+Installation Double click -> Specify the directory -> Leave everything as default -> click next -> Provide password (Read@123) -> Port number: 5432 (default) -> Location (leave it as default) -> Hit next again -> Next -> Let it install. 
+
+Don’t launch stack builder. 
+
+Step 2: Download and install Pgadmin
+(https://ftp.postgresql.org/pub/pgadmin/pgadmin4/v5.7/windows/pgadmin4-5.7-x64.exe)
+For older version of windows 
+
+Click next on all steps and install it. 
+
+Step3: Download the dvdrental.tar file. (https://ftp.postgresql.org/pub/pgadmin/pgadmin4/v5.7/windows/pgadmin4-5.7-x64.exe)
+Just download the file. Do not extract it. 
+
+Step4: Restart your computer
+
+Step5: Restore the DB
+Open Pgadmin4 application -> set the password : (Read@123)
+Click servers -> (double click on the PostgreSQL server you have installed).
+It will ask for the password that you have set for PostgreSQL server. Enter the password. 
+Right click on Server -> create Database -> type a name (dvdrental) and click save. Now you will see dvdrental in database.
+
+Right click on dvdrental -> restore 
+Format - custom or tar
+Filename : enter the path of tar file that you have downloaded.
+Restore options: switch on Pre-data, Data, Post-data. 
+Click refresh
+Right click query tool.
