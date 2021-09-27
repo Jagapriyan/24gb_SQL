@@ -1,0 +1,66 @@
+SELECT and WHERE are the most fundamental SQL statements.
+WHERE statement allows us to specify conditions for the rows to be returned. 
+WHERE clause appears immediateley after FROM clause of SELECT statement
+conditions are used to filter the rows returned from the SELECT statement
+There are standard operators to construct the conditions. 
+
+Basic WHERE Syntax
+
+SELECT column1, column2
+FROM table
+WHERE conditions;
+
+
+Comparison operators
+
+They check and compare the value of column with a value.
+Operators
+= Equal
+> Greater than
+< Less than
+>= Greater than or equal to
+<= Less than or equal to
+<> or != not equal to
+
+Logical Operators
+
+Logical operators allow us to combine multiple comparison operators
+
+
+AND
+OR 
+NOT
+
+Note: to denote string, use single quote
+
+Examples
+
+Display the details of customer whose name is jared
+
+SELECT * FROM customer
+WHERE first_name = 'Jared';
+
+
+Display the details of DVDs that has over $4 rental and over $19.99 replacement cost.
+
+SELECT * FROM film
+WHERE rental_rate > 4 AND
+replacement_cost >= 19.99;
+
+Return the count of Movies with above condition and rating is Return
+
+SELECT COUNT(*) FROM film
+WHERE rental_rate > 4 AND
+replacement_cost >= 19.99 AND rating = 'R';
+
+Other Logical operators examples
+
+SELECT COUNT(*) FROM film
+WHERE
+rating = 'R' or rating = 'PG-13'
+
+
+
+SELECT COUNT(*) FROM film
+WHERE
+rating <> 'R';

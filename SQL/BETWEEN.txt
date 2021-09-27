@@ -1,0 +1,33 @@
+BETWEEN operator can be used to match a value against a range of values.
+It can be used along WHERE
+Value BETWEEN low AND high. i.e Value >= low and value <= high
+
+we can also combine BETWEEN with NOT
+Value NOT BETWEEN low AND high. i.e Value < low OR Value > high. 
+
+Note: BETWEEN statement is inclusive and NOT BETWEEN is exclusive
+
+
+BETWEEN operator and Dates
+
+BETWEEN operator can be used for dates. The format is ISO 8601 standard format. YYYY-MM-DD
+
+
+Examples
+
+Find the number of payments which are between $8 and $9 and which are not between them. 
+
+SELECT COUNT(*) FROM payment
+WHERE amount BETWEEN 8 AND 9;
+
+
+SELECT COUNT(*) FROM payment
+WHERE amount NOT BETWEEN 8 AND 9;
+
+
+Find all the payments that happened in the first half of February.
+
+SELECT * FROM payment
+WHERE payment_date BETWEEN '2007-02-01' AND '2007-02-16';
+
+NOTE that here we have used 16 becuase it is not inclusive

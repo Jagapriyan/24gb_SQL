@@ -1,0 +1,12 @@
+https://www.postgresql.org/docs/8.3/functions-math.html
+
+Examples
+
+Calculate what percentage of replacement_cost is the rental rate
+
+SELECT ROUND(rental_rate/replacement_cost,2)*100 AS percentage_repacement_cost FROM film;
+
+If we need to maintain deposit, calculate 1 percent of replacement_cost
+
+SELECT 0.1 * replacement_cost AS deposit
+FROM film;

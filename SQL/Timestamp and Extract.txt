@@ -1,0 +1,102 @@
+TIMESTAMP 
+
+These will be more useful when creating our own tables and databases, rather than when querying a database
+
+Datatypes
+
+TIME - Contains only time information
+DATE - Contains only date information
+TIMESTAMP - Contains, date and time information
+TIMESTAMPTZ - Contains date, time and timezone information
+
+Careful considerations should be made when designing a tbale and databases and choosing a time data type. 
+Depending on the situation you may or may not need the full level of TIMESTAMPTZ
+
+Note: We can always remove historical information but we can't add any. TIMESTAMPTZ Can be TIMESTAMP but TIMESTAMP cannot be changed as TIMESTAMPTZ.
+
+
+Functions and operators related to specific data types:
+
+TIMEZONE
+
+Examples
+
+SHOW ALL
+
+SHOW TIMEZONE
+
+
+NOW
+
+Examples
+
+SELECT NOW()
+
+
+TIMEOFDAY
+
+SELECT TIMEOFDAY()   - in string format easy to read
+
+CURRENT_TIME
+
+SELECT CURRENT_TIME
+
+CURRENT_DATE
+
+SELECT CURRENT_DATE
+
+-----------------------------------
+
+Extracting information from a time based data type using 
+EXTRACT()
+AGE()
+TO_CHAR()
+
+
+EXTRACT() - allows you to "extract" or obtain a sub-component of a date value
+	Year     - EXTRACT(YEAR FROM date_col)
+	Month
+	Day
+	Week
+	Quarter
+	
+Examples
+
+SELECT EXTRACT (YEAR FROM payment_date) AS payment_year
+FROM payment;
+
+SELECT EXTRACT (MONTH FROM payment_date) AS payment_month
+FROM payment;
+
+SELECT EXTRACT (QUARTER FROM payment_date) AS payment_quarter
+FROM payment;
+	
+
+AGE() - Calculates and returns the current age given a timestamp. 
+
+AGE(date_col)
+
+Examples
+
+SELECT AGE(payment_date)
+FROM payment;
+
+
+
+TO_CHAR() - General function to convert data types to text. Generally useful for timestamp formatting.
+
+TO_CHAR(date_col,'mm-dd-yyyy') 
+
+Examples
+
+SELECT TO_CHAR (payment_date, 'mm-dd-yy')
+FROM payment
+
+SELECT TO_CHAR (payment_date, 'MONTH-YYYY')
+FROM payment
+
+
+Documentation
+
+https://www.postgresql.org/docs/8.3/functions-datetime.html
+

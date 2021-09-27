@@ -1,0 +1,25 @@
+HAVING clause allows us to filter after an aggregation has already taken place
+Filtering using WHERE caluse cannot be done on aggregate columns. Consider following example
+
+SELECT company, SUM(SALES)
+FROM companies
+WHERE company != 'Google'
+GROUP BY company; 
+
+Here we cannot use filter on SUM(SALES).
+We need to use HAVING, as it allows us to use the aggregate result as filter along with a GROUP BY.
+
+SELECT company, SUM(SALES)
+FROM companies
+WHERE company != 'Google'
+GROUP BY company
+HAVING SUM(SALES) > 1000; 
+
+
+EXAMPLES
+
+Return the list of customers with over $100 payment
+
+SELECT customer_id, SUM(amount) FROM payment
+GROUP BY customer_id
+HAVING SUM(amount) > 100;

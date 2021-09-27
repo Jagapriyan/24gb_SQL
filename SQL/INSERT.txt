@@ -1,0 +1,48 @@
+INSERT allows you to add in rows to a table. 
+
+GENERAL Syntax
+INSERT INTO table (column1, column2, ...)
+VALUES
+(value1, value2, ...),
+(value1, value2, ...) ...;
+
+INSERT also allows you to insert values from another table.
+
+Syntax
+
+INSERT INTO table(column1,column2,...)
+SELECT column1,column2,...
+FROM another_table
+WHERE condition;
+
+
+Keep in mind, the inserted row values must match up for the table, including constraints.
+SERIAL columns do not need to be provided a value.
+
+
+Examples
+INSERT INTO account(username,password,email,created_on)
+VALUES
+('jagan','password','jagan@email.com',CURRENT_TIMESTAMP);
+
+INSERT INTO job(job_name)
+VALUES
+('developer');
+
+
+Note that this table has foreign key, so if we insert values out of range of reference tables, it will throw an error
+
+INSERT INTO account_job(user_id,job_id,hire_date)
+VALUES
+(1,1,CURRENT_TIMESTAMP);
+
+
+Following query will throw an error
+
+INSERT INTO account_job(user_id,job_id,hire_date)
+VALUES
+(10,10,CURRENT_TIMESTAMP);
+
+ERROR:  insert or update on table "account_job" violates foreign key constraint "account_job_user_id_fkey"
+DETAIL:  Key (user_id)=(10) is not present in table "account".
+SQL state: 23503

@@ -1,0 +1,82 @@
+NULLIF
+
+The NULLIF function takes in 2 inputs and returns NULL if both are equal, otherwise it will return the first argument passed to it.
+
+SYNTAX 
+
+NULLIF(arg1,arg2)
+
+
+Example
+
+NULLIF(10,10)
+
+Returns NULL
+
+NULLIF(10,12)
+
+Returns 10
+
+
+This becomes very useful in cases where a NULL value would cause an error or unwanted result. 
+
+Example table
+
+
+Name   Department
+
+Lauren  A
+Vinton  A
+Claire  B
+
+
+Create table
+
+CREATE TABLE depts(
+	first_name VARCHAR(50),
+	department VARCHAR(50)
+)
+
+INSERT VALUES
+
+INSERT INTO depts(first_name,department)
+VALUES
+('Lauren','A'),
+('Vinton','A'),
+('Claire','B');
+
+
+Calculate the ratio between two departments
+
+
+SELECT 
+SUM ( CASE WHEN department = 'A' THEN 1 ELSE 0 END)/
+SUM ( CASE WHEN department = 'B' THEN 1 ELSE 0 END) 
+AS department_ratio
+FROM depts;
+
+
+
+IF there are no people in department B
+
+DELETE FROM depts 
+WHERE department = 'B';
+
+If we try running the same ratio command it will throw error
+
+ERROR:  division by zero
+SQL state: 22012
+
+
+
+SELECT 
+SUM ( CASE WHEN department = 'A' THEN 1 ELSE 0 END)/
+NULLIF (SUM (CASE WHEN department = 'B' THEN 1 ELSE 0 END),0) 
+AS department_ratio
+FROM depts;
+
+
+Remember NULLIF returns NULL if both arguments are equal. So we use 0 as second argument.
+
+
+
