@@ -1,0 +1,108 @@
+1) Create a table named 'results' with 3 VARCHAR columns called track, artist, and album, with lengths 200, 120, and 160, respectively.
+Create one integer column called track_length_mins.
+
+
+CREATE TABLE results (
+	track VARCHAR(200),
+	artist VARCHAR(120),
+	album VARCHAR(160),
+	track_length_mins INT
+);
+
+
+2) Insert following values into the created column
+
+track - Waka Waka
+artist - Shakira
+album - FIFAL 2010
+track_length_mins - 3.30
+
+
+track   - Girl Gang
+artist - Gin Wigmore
+album - Women WC 2022
+track_length_mins - 7.50
+
+INSERT INTO results (track,artist,album,track_length_mins)
+VALUES(
+	'Girl Gang',
+	'Gin Wigmore',
+	'Women WC 2022',
+	7.50
+)
+
+
+INSERT INTO results (track, artist, album, track_length_mins)
+VALUES (
+	'Waka Waka',
+	'Shakira',
+	'FIFA 2010',
+ 	3.30
+)
+
+
+3) 
+2) SELECT all the columns from your new table. No rows will be returned, but you can confirm that the table has been created.
+SELECT * FROM results;
+
+
+
+4) Change the album name from FIFAL 2010 to FIFA 2010
+
+
+UPDATE results 
+SET album = 'FIFAL 2010';
+
+
+
+5) DELETE The entry for 'Women WC 2022'
+
+DELETE FROM results
+WHERE album = 'Women WC 2022'
+
+
+Queries
+6) A customer asks for all the film titles and release year alone. Find the data. 
+Hint: Use film table. we need to show the title and release year to customer. 
+
+SELECT title,release_year FROM film;
+
+
+
+7) Customers are not aware of the rating system in the country. Please find the unique rating system present in our film table. 
+Hint: Use Film table
+
+SELECT DISTINCT rating FROM film;
+
+8) Find the number of films present in our database
+Hint: Use Film table
+
+SELECT COUNT(*) FROM film;
+
+9) We need to find the email of customer with first_name Mary and Last_name Smith. We need to send an email to her for her anniversary.  
+
+SELECT  first_name,last_name,email FROM customer
+WHERE first_name = 'Mary' AND last_name = 'Smith';
+
+
+10) We need to reward our first customers. Find the top 10 customers (customer id) and payment_date who made first 10 payments.
+
+
+SELECT customer_id,payment_date FROM payment
+ORDER BY payment_date
+LIMIT 10; 
+
+11) Find the names of customer whose names begins with A
+Hint Use: customer table
+
+SELECT * FROM customer
+WHERE first_name LIKE 'A%';
+
+
+12) We need to give bonus to the staff who handled more number of transactions. Find the staff who did more number of transactions.  Use payment table for that. 
+Hint Use: payment table
+
+SELECT staff_id, COUNT(payment) FROM payment
+GROUP BY staff_id;
+
+
