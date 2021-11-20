@@ -1,0 +1,36 @@
+OUTER JOINS allows us to specify how to deal with values only present in one of the tables being joined.
+These are complex JOINS. 
+
+
+In previous INNER JOIN, when we match columns from two tables, only the rows that are matched were retrieved.
+In case of FULL OUTER JOIN, it just grabs all the rows from the columns that are matched. 
+FULL OUTER JOIN is symmetrical. Changing the table order will not change the result. 
+FULL OUTER JOIN will have NULL values where we only have row present in one particular table. 
+
+SYNTAX
+SELECT * FROM Table_A
+FULLER OUTER JOIN Table_B
+ON Table_A.column_match = Table_B.column_match;
+
+FULL OUTER JOIN WITH WHERE CLAUSE (EXACT OPPOSITE TO INNER JOIN) - it will return rows that are unique to each table. Common rows will be discarded.
+
+SYNTAX
+
+SELECT * FROM Table_A
+FULL OUTER JOIN Table_B
+ON Table_A.column_match = Table_B.column_match
+WHERE Table_A.id IS NULL OR Table_B.id IS NULL; 
+
+As mentioned above, this syntax will return rows that are unique either to Table_A or Table_B.
+
+
+Examples
+
+We don't want to have any customer information that does not have payment and any payment information that is not connected to a customer. 
+
+SELECT * FROM customer
+FULL OUTER JOIN payment
+ON customer.customer_id = payment.customer_id
+WHERE customer.customer_id IS null OR 
+payment.customer_id IS null;
+

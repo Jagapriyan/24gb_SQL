@@ -1,0 +1,51 @@
+COALESCE
+
+The COALESCE function accepts an unlimited number of arguments. It returns the first argument that is not null. If all arguments are null, the COALESCE function will return null.
+
+COALESCE(arg_1,arg_2,...,arg_n)
+
+
+Example
+
+SELECT COALESCE(1,2)
+
+Output
+1
+
+
+SELECCT COALESCE(NULL,2,3)
+
+Output
+2
+
+Use of COALESCE function: It is useful when querying a table that contains null values and we need to substitute it with another value.
+
+
+Consider a Table of products
+
+
+Item Price Discount
+A     100   20
+B     300   null
+C     200   10
+
+Here Item B does not have a discount. 
+
+
+Calculate final amount
+
+
+SELECT, item,(price-discount) AS final 
+FROM table
+
+SQL cannot substract NULL FROM INTEGER. So it will return Final price of item B as NULL.
+
+SELECT item,(price - COALESCE(discount,0))
+AS final FROM table
+
+Here SQL will see if there's non null value in discount it will return
+If there is NULL in discount, it will return 0.
+
+When we have a table with NULL values and we need to do mathematical operations, we can use this.  
+ 
+ 

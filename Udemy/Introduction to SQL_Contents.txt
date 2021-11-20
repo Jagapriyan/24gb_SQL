@@ -1,0 +1,12 @@
+Selecting: SELECT
+Ordering: ORDER BY
+Filtering: WHERE and HAVING
+Aggregating: SUM, COUNT, MIN, MAX and AVG
+Text Manipulation: LEFT, RIGHT, LEN and SUBSTRING
+Grouping: GROUP BY
+Basic JOINS: INNER JOIN, LEFT JOIN, RIGHT JOIN
+Combining data from different tables: UNION, UNION ALL
+Transforming Data: CASE
+CREATING TABLES: CREATE, READ, UPDATE AND DELETE (CRUD)
+VARIABLES
+TEMPORARY TABLES

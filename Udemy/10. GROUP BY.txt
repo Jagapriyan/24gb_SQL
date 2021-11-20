@@ -1,0 +1,87 @@
+GROUP BY will allow us to aggregate data and apply functions to better understand how data is distributed per category. 
+
+GROUP BY allows us to aggregate columns per some category
+
+
+We need to choose a categorical column to GROUP BY
+Categorical columns are non-continous
+Keep in mind, they can still be numerical, such as cabin class categories in ship (e.g class 1, class 2). They also may appear continous, but you could treat them as a category.
+
+What GROUP BY Does
+
+GROUP BY groups the table based on a cateogory and then an aggregate funtion can be applied.
+
+Example:
+
+DVD rental rates can be grouped (eg. 9, 99, 19 etc,). Then an aggregate function can be applied on the groups
+
+SYNTAX
+
+SELECT Category_column, AGG(data_column)
+FROM table
+GROUP BY Category_column;
+
+Note that GROUP BY must appear right after a FROM or WHERE statement. So if we want, before we do the group by, we can filter using WHERE statement. 
+
+SELECT Category_column, AGG(data_column)
+FROM table
+WHERE Category_column != 'A'
+GROUP BY Category_column;
+
+It is important to note here that the column in SELECT statement must be present in Aggregate function or in GROUP BY.
+
+Example
+SELECT company, division, SUM(sales)
+FROM finance_table
+GROUP BY company, division;
+
+here we used company and division in SELECT. So it should be used in GROUP BY. 
+the sales does not appear in GROUP BY so it should appear in aggregate function. 
+Also note that when we apply ORDER BY, use only the aggregated column.
+
+WHERE statement should not refer to the aggregation result. 
+
+SELECT company, division, SUM(sales)
+FROM finance_table
+WHERE division IN ('marketing', 'transport')
+GROUP BY company, division;
+
+Examples
+
+Find the total sum amount per customer. and order by most spending. 
+
+Here we are grouping the customers based on customer id and adding the amount column. 
+
+SELECT customer_id, SUM(amount) FROM payment
+GROUP BY customer_id
+ORDER BY SUM(amount) DESC;
+
+List the customers with their number of payments and sort them IN DESC. 
+
+SELECT customer_id, COUNT(amount)
+FROM payment
+GROUP BY customer_id
+ORDER BY COUNT(amount) DESC;
+
+Using multiple columns in grouping
+
+note that the select order and group order to be same for a understandable result.
+
+Example: list the set of customers servered by each staff. 
+
+SELECT customer_id, staff_id, SUM(amount)
+FROM payment 
+GROUP BY customer_id, staff_id
+ORDER BY customer_id;
+
+
+Grouping DATE, we need to call a specialized DATE function so that the timestamp in DATE column is converted to DATE and then grouped. 
+Example Query
+SELECT DATE(payment_date) FROM payment;
+
+List the total sales amount for each date
+
+SELECT DATE(payment_date), SUM(amount)
+FROM payment
+GROUP BY DATE(payment_date)
+ORDER BY DATE(payment_date) ASC;

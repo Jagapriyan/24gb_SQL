@@ -1,0 +1,55 @@
+What about when you want to compare all the values in one table with another, to see which rows match? That's when you can use a LEFT JOIN.
+
+A LEFT JOIN will return ALL rows in the first table, and any matching rows in the right table. If there aren't any matches in the right table for a particular row, then a NULL is returned. This quickly lets you assess the gaps in your data, and how many you have.
+
+
+
+A LEFT OUTER JOIN results in the set of records that re in the left table, if there is no match with the right table, the results are null.
+LEFT OUTER JOIN is not symmetrical. The order of Table name in query matters here.
+LEFT OUTER JOIN, grabs everything that matches in both column, rows that are exclusive to tableA (left table) and ignores the rows that are exclusive to tableb(right table)
+
+
+SYNTAX
+SELECT * FROM TableA
+LEFT OUTER JOIN TableB
+ON TableA.col_match = TableB.col_match
+
+LEFT OUTER JOIN with WHERE CLAUSE - Get rows unique to left table
+What if we only wanted entries unique to TableA? Those rows found in TableA and not found in Table B.
+
+SELECT * FROM TableA
+LEFT OUTER JOIN TableB
+ON TableA.col_match = tableb.col_match
+WHERE TableB.id is NULL
+
+Consider two tables
+
+film and inventory
+
+SELECT film.film_id,title,inventory_id,store_id
+FROM film
+LEFT OUTER JOIN inventory ON
+inventory.film_id = film.film_id
+
+Example Scenario
+
+Find the list of movies that are not available in inventory
+
+Solution:
+We have two tables, film - contains all details about film
+inventory - contains info whether a film is available or not
+
+The left outer join here extracts all columns from tableA (film) and filters them with column on TableB(inventory) 
+
+SELECT film.title, inventory.film_id, inventory.store_id, inventory.inventory_id
+FROM film
+LEFT OUTER JOIN inventory ON
+film.film_id = inventory.film_id
+WHERE inventory.film_id IS null;
+
+
+
+
+
+
+

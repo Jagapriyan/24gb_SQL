@@ -1,0 +1,42 @@
+CAST Operator
+
+The CAST operator lest's you convert from one data type into another.
+
+Note that not every instance of data type can be CAST to another data type, it must be reasonable to convert the data, for example '5' to an integer will work, 'five' to an integer will not. 
+
+Syntax for CAST function
+
+EX:
+SELECT CAST('5' AS INTEGER) AS new_int;
+
+This will throw an error
+
+SELECT CAST('five' AS INTEGER) AS new_int;
+
+
+ERROR:  invalid input syntax for type integer: "five"
+LINE 1: SELECT CAST('five' AS INTEGER) AS new_int;
+                    ^
+SQL state: 22P02
+Character: 13
+
+Syntax for CAST Opertor (Only in PG)
+
+SELECT '5'::INTEGER
+
+
+Note that we can use this in a SELECT query with a column name instead of a single instance.
+
+SELECT CAST(date AS TIMESTAMP)
+FROM table
+
+
+
+Example from our DB
+
+How to calculate the number of digits in inventory_id.
+
+We can do this by converting it as VARCHAR. Then use CHAR_LENGTH
+
+
+SELECT CHAR_LENGTH (CAST(inventory_id AS VARCHAR)) FROM rental;  

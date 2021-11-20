@@ -1,0 +1,68 @@
+JOINS allows to combine multiple tables
+The main reason for using JOINS is the availability of information in certain tables only.
+
+
+INNER JOIN
+
+Simplest of JOINS
+The result will contain the set of records that match in both tables. It will ignore the records that does not match. 
+INNER JOIN is symmetrical. Which means we can use the tables in any order for JOIN operation. The result will not be affected. 
+IF we mention just JOIN, PostgreSQL will treat 
+When selecting columns, for unique columns, we need not mention table name but for columns that are present in both tables, mention the table name in SELECT statement. 
+
+Consider an example of a webinar. 
+There will be people who register and attend / does not attend. Peple who attend and does not register. 
+We will have two tables, registration table and attendance table. When we need only the records of people who register and attended, we need to use inner joins. 
+
+
+
+SYNTAX
+
+SELECT * FROM Table_A
+INNER JOIN Table_B
+ON Table_A.col_match = Table_B.col_match
+
+ 
+Query for above scenario
+
+SELECT * FROM registrations
+INNER JOIN logins
+ON registrations.name = logins.name
+
+SELECT logins.name FROM registrations
+INNER JOIN logins
+ON registrations.name = logins.name
+
+Examples from DVD Rental DB
+
+the customer_id column is in payment and customer tables. 
+
+EX1: JOIN both tables based on common column name. 
+SELECT * FROM payment
+INNER JOIN customer
+ON payment.customer_id = customer.customer_id;
+
+ex2: retrieve the list of customers who made purchases. (ignore customers who did not purchase)
+
+SELECT payment_id, payment.customer_id, first_name FROM payment
+INNER JOIN customer
+ON payment.customer_id = customer.customer_id;
+
+
+Multiple JOINS on single query 
+
+SYNTAX
+
+Note here we have used INNER JOIN, any JOIN can be used and for second JOIN, we used tables Table_B and Table_C. We can also use Table_A and Table_C based on matching columns. 
+
+
+SELECT Table_A.columnname, Table_B.columnname, Table_C FROM Table_A
+INNER JOIN Table_B
+ON Table_A.col_match = Table_B.col_match
+INNER JOIN Table_C
+ON Table_B.col_match = Table_C.col_match 
+
+
+
+
+

@@ -1,0 +1,98 @@
+A sub query allows you to construct complex queries, essentially performing a query on the results of another query. 
+The syntax is straight forward and involves two SELECT statements. 
+Imagine a table consisteing of student names and their test scores. 
+
+Standard query for grade
+
+SELECT student, grade
+FROM test_scores
+
+Average grade
+
+SELECT AVG(grade)
+FROM test_scores
+
+
+How can we get list of students who scored better than the average grade
+
+This is where a subquery can help us get the result in a "single" query request
+
+The subquery is performed first since it is inside the parenthesis. 
+
+
+SELECT student, grade FROM test_scores
+WHERE grade > (SELECT AVG(grade)
+FROM test_scores)
+
+
+We can also use the IN operator in conjunction with a subquery to check against multiple results returned. 
+
+For example, a sub query can operate on a separate table. 
+
+SELECT student, grade
+FROM test_scores
+WHERE student IN
+(SELECT student FROM honor_roll_table)
+
+
+examples - it is best practice to write sub query first
+
+Find the films that have avearge rental rates higher than average rental rate. 
+
+SELECT title, rental_rate FROM film
+WHERE rental_rate > (SELECT AVG(rental_rate) FROM film)
+
+In above example, the subquery returned single value. If subquery returns back multiple values, we need to use IN Operator. 
+Let's use rental and inventory tables here
+
+scenario: We need to find the list of films returned between certain dates
+Solution: 
+film name in film table, film id in inventory table, return date in rental table
+Connectivity between rental and inventory table is inventory_id. So let's find film_id first. (sub query)
+rental table has rental details but it does not have film id. so we need to join inventory table and rental table. 
+
+Once the film id is found in subquery, use select statement on FILM table and IN operator to get the film name.
+
+SELECT film_id, title FROM film
+WHERE film_id IN (SELECT inventory.film_id
+FROM rental
+INNER JOIN inventory 
+ON
+rental.inventory_id = inventory.inventory_id
+WHERE rental.return_date BETWEEN '2005-05-29' AND '2005-05-30');
+ 
+
+
+
+
+=============================================================================
+EXISTS Operator
+
+EXISTS operator is used to test for existense of rows in a subquery. 
+Typically a subquery is passed in the EXISTS() function to check if any rows are returned with subquery
+
+
+Typical syntax
+SELECT column_name
+FROM table_name
+WHERE EXISTS
+(SELECT column_name FROM
+table_name WHERE condition);
+
+Scenario: we want to find customer who has atleast 1 payement greater than 11. Grab the first name and last name of operator
+
+
+
+
+SELECT first_name, last_name
+FROM customer AS c
+WHERE EXISTS 
+(SELECT * FROM payment AS p
+WHERE p.customer_id = c.customer_id AND amount > 11)
+
+
+SELECT first_name, last_name
+FROM customer AS c
+WHERE NOT EXISTS 
+(SELECT * FROM payment AS p
+WHERE p.customer_id = c.customer_id AND amount > 11)

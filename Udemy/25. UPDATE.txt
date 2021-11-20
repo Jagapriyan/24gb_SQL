@@ -1,0 +1,63 @@
+UPDATE allows for changing values of columns in a table
+
+UPDATE table
+SET column1 = value1,
+column2 = value2,...
+WHERE condition;
+
+The WHERE Clause is very important, otherwise we will end up updating all columns. 
+
+
+
+
+Ex
+
+UPDATE account
+SET last_login = CURRENT_TIMESTAMP
+WHERE last_login IS NULL;
+
+We can also use UPDATE without WHERE condition
+
+UPDATE account
+SET last_login = CURRENT_TIMESTAMP;
+
+Values can be set based on another column
+
+UPDATE account
+SET last_login = created_on;
+
+
+We can also use other tables values. It is known as UPDATE join even though we are not using JOIN keyword
+
+Syntax
+
+UPDATE TableA
+SET original_col = TableB.new_col
+FROM tableB
+WHERE tableA.id = TableB.id
+
+
+Example
+
+UPDATE account_job
+SET hire_date = account.created_on
+FROM account
+WHERE account_job.user_id = account.user_id;
+
+
+
+UPDATE keyword does not return any column.
+We can set it to return column.
+
+Return affected rows
+
+UPDATE account
+SET last_login = created_on
+RETURNING account_id,last_login;
+
+Ex
+
+UPDATE account_job
+SET hire_date = CURRENT_TIMESTAMP
+RETURNING user_id,hire_date;
+

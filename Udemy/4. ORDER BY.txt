@@ -1,0 +1,36 @@
+ORDER BY can be used to sort rows based on ascending or descending order
+ORDER BY will be placed towards the end of a query, since we want to do any selection and filtering before finally sorting. 
+ASC - Ascending order (default)
+DESC - descending order
+
+We can use ORDER BY for multiple columns. This makes sense when one column has duplicate entries. Use the duplicate column first when using ORDER BY. 
+
+
+SYNTAX
+
+SELECT column1, column2
+FROM table
+ORDER BY column1 ASC / DESC;
+
+
+Examples
+
+Fetch all columns in customer column, sort by first name. 
+
+SELECT * FROM customer
+ORDER BY first_name;
+
+Fetch store_id, first_name, last_name columns in customer column, sort by store_id and first name. 
+
+SELECT store_id, first_name, last_name FROM customer
+ORDER BY store_id, first_name;
+
+Mixing the ORDER BY
+
+SELECT store_id, first_name, last_name FROM customer
+ORDER BY store_id DESC, first_name ASC;
+
+We can also user ORDER BY without displaying them too. Typically it is not a good practice as the result will not show on what basis the columns are sorted. 
+
+SELECT first_name, last_name FROM customer
+ORDER BY store_id DESC, first_name ASC;
